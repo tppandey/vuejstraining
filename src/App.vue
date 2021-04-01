@@ -1,28 +1,66 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+     ================
+    <subs></subs>
+    ================
+    <add></add>
+    <input type="text" v-model="json"/>
+
+
+    <router-view></router-view>
+
+
+    <h1> current price: {{price}}</h1>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import subs from './components/Com2.vue'
+import add from './components/Com3.vue'
+import { eventBus } from './eventBus.js'
+
 
 export default {
-  name: 'App',
+
+  data() {
+    return {
+      altbalaji: "mobiotics",
+      counter: 0,
+      json: 0,
+      arr : [12, 30,155],
+      price: 0
+    }
+  },
+  watch: {
+    counter(val) {
+      if (val === 100) {
+        // alert(1);
+      }
+    },
+    json (val) {
+    console.log(val)
+    }
+  },
+  methods: {
+
+  },
   components: {
-    HelloWorld
+    subs,
+    add
+  },
+  mounted() {
+    setTimeout (() => {
+      this.counter = 100;
+    },2000)
+
+
+    eventBus.$on('cart', (data) => {
+      this.price += data;
+    })
   }
+
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
