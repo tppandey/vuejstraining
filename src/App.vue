@@ -7,10 +7,19 @@
     <input type="text" v-model="json"/>
 
 
-    <router-view></router-view>
 
 
     <h1> current price: {{price}}</h1>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+        <router-view></router-view>
+
   </div>
 </template>
 
