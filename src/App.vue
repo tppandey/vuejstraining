@@ -6,6 +6,8 @@
     <add></add>
     <input type="text" v-model="json"/>
 
+<p id="abcd">Resize the browser window to see how the text size scales.</p>
+
 
 
 

@@ -13,7 +13,7 @@
 
             </div>
 
-            <div>
+            <div lft="playico" right="pause" up="seek" done ="">
                 meta data
             </div>
         </div>

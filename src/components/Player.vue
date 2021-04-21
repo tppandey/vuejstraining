@@ -4,6 +4,7 @@
        <video id="video"
            width="640"
            poster="//shaka-player-demo.appspot.com/assets/poster.jpg"
+           controls
             ></video>
   </div>
 </template>
@@ -16,7 +17,7 @@ export default {
 
 mounted () {
     const manifestUri =
-    'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';
+    'https://cdn.cloud.altbalaji.com/content/2021-02/7604-6019a29bed613/manifest.mpd';
 
 function initApp() {
   // Install built-in polyfills to patch browser incompatibilities.
@@ -31,6 +32,25 @@ function initApp() {
     console.error('Browser not supported!');
   }
 }
+function setVideoTrackToPlayer(track) {
+        if (window.player) {
+          let configOfPlayer = window.player.getConfiguration();
+          if((track.title) && (track.title).toLowerCase() == "auto") {
+            configOfPlayer.abr.enabled = true;
+            window.player.configure(configOfPlayer);
+          } else {
+            configOfPlayer.abr.enabled = false;
+            window.player.configure(configOfPlayer);
+            window.player.selectVariantTrack(track,true);
+          }
+        }
+  }
+function resolution () {
+  var videoTracksList = window.player.getVariantTracks();
+  console.log("videoTracksList", videoTracksList)
+  setVideoTrackToPlayer(videoTracksList[0])
+
+}
 
  function initPlayer() {
   // Create a Player instance.
@@ -39,6 +59,7 @@ function initApp() {
 
   // Attach player to the window to make it easy to access in the JS console.
   window.player = player;
+  // resolution();
 
   // Listen for error events.
   player.addEventListener('error', onErrorEvent);
@@ -48,6 +69,8 @@ function initApp() {
   try {
      player.load(manifestUri).then(() => {
          video.play()
+           resolution();
+
      })
     // This runs if the asynchronous load is successful.
     console.log('The video has now been loaded!');
