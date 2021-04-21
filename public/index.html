@@ -13,5 +13,18 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+
+    <script>
+
+  window.navigator.serviceWorker.register('./sw.js').then ((reg) => {
+    console.log("success", reg)
+  }).catch ((err) => {
+    console.log("fail", err)
+
+  })
+
+
+    </script>
   </body>
 </html>
